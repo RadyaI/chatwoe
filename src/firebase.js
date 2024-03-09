@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-    apiKey: process.env.FIREBASE_KEY,
+    apiKey: process.env.VUE_FIREBASE_KEY,
     authDomain: "chatwoe.firebaseapp.com",
     projectId: "chatwoe",
     storageBucket: "chatwoe.appspot.com",
