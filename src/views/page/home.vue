@@ -189,6 +189,7 @@ export default {
 .card {
     width: 90%;
     height: 80%;
+    margin-bottom: 60px;
 }
 
 .chat-card {
