@@ -10,9 +10,10 @@
 
                             <div v-if="i.name != isLoggedInName">
                                 <div class="message">{{ i.chat }}</div>
-                                <div class="name"><small>{{ i.name }} - {{ i.time }}  <span
+                                <div class="name"><small>{{ i.name }} - {{ i.time }} <span
                                             style="color: red; cursor: pointer;" @click="deleteMessage(i)"
-                                            v-if="isLoggedInName == 'Muhammad Radya Iftikhar'"> - Hapus</span></small></div>
+                                            v-if="isLoggedInName == 'Muhammad Radya Iftikhar'"> - Hapus</span></small>
+                                </div>
                             </div>
 
                             <div class="chat-you" v-if="i.name == isLoggedInName">
@@ -46,7 +47,7 @@ export default {
     name: 'app',
     data() {
         return {
-            isLoggedIn: true,
+            isLoggedIn: false,
             chat: '',
             chatData: {},
             isLoggedInName: ''
@@ -56,8 +57,8 @@ export default {
         this.scrollToBottom();
     },
     mounted() {
-        // this.isLoggedInName = localStorage.getItem('isLoggedIn') ? JSON.parse(localStorage.getItem('user')).name : null
-        // this.isLoggedIn = localStorage.getItem('isLoggedIn') ? true : false
+        this.isLoggedInName = localStorage.getItem('isLoggedIn') ? JSON.parse(localStorage.getItem('user')).name : null
+        this.isLoggedIn = localStorage.getItem('isLoggedIn') ? true : false
         this.scrollToBottom()
 
         // Get Chat
