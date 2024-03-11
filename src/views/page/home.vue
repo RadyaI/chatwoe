@@ -115,7 +115,8 @@ export default {
                 let chatToSend = {
                     time: new Date().toLocaleDateString(),
                     waktu: Timestamp.now().toMillis(),
-                    name: JSON.parse(localStorage.getItem('user')).name,
+                    // name: JSON.parse(localStorage.getItem('user')).name,
+                    name: "Anonim",
                     chat: this.chat
                 }
                 await addDoc(collection(db, 'chatDB'), chatToSend)
