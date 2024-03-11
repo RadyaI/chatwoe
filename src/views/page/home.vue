@@ -1,8 +1,9 @@
 <template>
     <div>
         <div class="container">
-            <button class="btn-login" v-if="!isLoggedIn" @click="login">Login Dulu Dong (Pake Google Biar Ga Ribet) 😇</button>
-            <div class="wrapper" :class="{ blur: !isLoggedIn }">
+            <!-- <button class="btn-login" v-if="!isLoggedIn" @click="login">Login Dulu Dong (Pake Google Biar Ga Ribet) 😇</button> -->
+            <!-- <div class="wrapper" :class="{ blur: !isLoggedIn }"> -->
+            <div class="wrapper">
                 <div class="card">
                     <button class="btn-logout" v-if="isLoggedIn" @click="logout">Logout</button>
                     <div class="chat-card" ref="chatCard">
