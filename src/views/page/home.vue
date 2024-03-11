@@ -5,19 +5,20 @@
             <!-- <div class="wrapper" :class="{ blur: !isLoggedIn }"> -->
             <div class="wrapper">
                 <div class="card">
-                    <button class="btn-logout" v-if="isLoggedIn" @click="logout">Logout</button>
+                    <!-- <button class="btn-logout" v-if="isLoggedIn" @click="logout">Logout</button> -->
+                    <button class="btn-logout" v-if="isLoggedIn" @click="yourName">Nama Anda</button>
                     <div class="chat-card" ref="chatCard">
                         <div class="chat" v-for="i in chatData" :key="i.id">
 
-                            <div v-if="i.name != isLoggedInName">
+                            <div v-if="i.name != isLoggedInName || i.name == 'anonim'">
                                 <div class="message">{{ i.chat }}</div>
                                 <div class="name"><small>{{ i.name }} - {{ i.time }} <span
                                             style="color: red; cursor: pointer;" @click="deleteMessage(i)"
-                                            v-if="isLoggedInName == 'Muhammad Radya Iftikhar'"> - Hapus</span></small>
+                                            v-if="isLoggedInName == '486399'"> - Hapus</span></small>
                                 </div>
                             </div>
 
-                            <div class="chat-you" v-if="i.name == isLoggedInName">
+                            <div class="chat-you" v-if="i.name == isLoggedInName && i.name != 'anonim'">
                                 <div class="message-you">{{ i.chat }}</div>
                                 <div class="name-you"><small>{{ i.name }} - {{ i.time }} - <span
                                             style="color: red; cursor: pointer;"
@@ -51,17 +52,18 @@ export default {
             isLoggedIn: true,
             chat: '',
             chatData: {},
-            isLoggedInName: ''
+            // isLoggedInName: ''
+            isLoggedInName: localStorage.getItem('name')
         }
     },
     updated() {
         this.scrollToBottom();
     },
     mounted() {
-        this.isLoggedInName = localStorage.getItem('isLoggedIn') ? JSON.parse(localStorage.getItem('user')).name : "anonim"
+        // this.isLoggedInName = localStorage.getItem('isLoggedIn') ? JSON.parse(localStorage.getItem('user')).name : "anonim"
         // this.isLoggedIn = localStorage.getItem('isLoggedIn') ? true : false
         this.scrollToBottom()
-
+        this.changeName()
         // Get Chat
         const db = getFirestore()
         const chatCollection = collection(db, 'chatDB')
@@ -72,6 +74,14 @@ export default {
         // Get Chat
     },
     methods: {
+        changeName() {
+            this.isLoggedInName = localStorage.getItem('name') ? localStorage.getItem('name') : "anonim"
+        },
+        yourName() {
+            let name = prompt("Masukkan nama anda")
+            localStorage.setItem('name', name)
+            location.reload()
+        },
         async login() {
             try {
                 const auth = getAuth()
@@ -116,7 +126,7 @@ export default {
                     time: new Date().toLocaleDateString(),
                     waktu: Timestamp.now().toMillis(),
                     // name: JSON.parse(localStorage.getItem('user')).name,
-                    name: "Anonim",
+                    name: localStorage.getItem('name') ? localStorage.getItem('name') : "anonim",
                     chat: this.chat
                 }
                 await addDoc(collection(db, 'chatDB'), chatToSend)
