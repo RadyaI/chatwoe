@@ -47,7 +47,7 @@ export default {
     name: 'app',
     data() {
         return {
-            isLoggedIn: false,
+            isLoggedIn: true,
             chat: '',
             chatData: {},
             isLoggedInName: ''
@@ -58,7 +58,7 @@ export default {
     },
     mounted() {
         this.isLoggedInName = localStorage.getItem('isLoggedIn') ? JSON.parse(localStorage.getItem('user')).name : null
-        this.isLoggedIn = localStorage.getItem('isLoggedIn') ? true : false
+        // this.isLoggedIn = localStorage.getItem('isLoggedIn') ? true : false
         this.scrollToBottom()
 
         // Get Chat
